@@ -18,16 +18,7 @@ def members
   JSON.parse(result, symbolize_names: true)
 end
 
-WikiData.ids_from_pages('en', members.map { |c| c[:wikiname] }).each_with_index do |p, i|
-  puts i if (i % 30).zero?
-  data = WikiData::Fetcher.new(id: p.last).data rescue nil
-  unless data
-    warn "No data for #{p}"
-    next
-  end
-  data[:original_wikiname] = p.first
-  ScraperWiki.save_sqlite([:id], data)
+members.map { |w| w[:wikiname] }.each_slice(250) do |sliced|
+  EveryPolitician::Wikidata.scrape_wikidata(names: { en: sliced })
 end
-
-warn RestClient.post ENV['MORPH_REBUILDER_URL'], {} if ENV['MORPH_REBUILDER_URL']
-
+warn EveryPolitician::Wikidata.notify_rebuilder
