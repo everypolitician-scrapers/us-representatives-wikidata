@@ -18,6 +18,6 @@ def members
   JSON.parse(result, symbolize_names: true)
 end
 
-members.map { |w| w[:wikiname] }.each_slice(25) do |sliced|
+members.map { |w| w[:wikiname] }.shuffle.each_slice(25) do |sliced|
   EveryPolitician::Wikidata.scrape_wikidata(names: { en: sliced })
 end
