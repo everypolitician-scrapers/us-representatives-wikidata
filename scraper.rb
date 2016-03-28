@@ -7,6 +7,7 @@ require 'rest-client'
 require 'scraperwiki'
 require 'wikidata/fetcher'
 require 'mediawiki_api'
+require 'active_support/inflector'
 
 def members
   morph_api_url = 'https://api.morph.io/tmtmtmtm/us-congress-members/data.json'
@@ -18,6 +19,20 @@ def members
   JSON.parse(result, symbolize_names: true)
 end
 
-members.map { |w| w[:wikiname] }.shuffle.each_slice(25) do |sliced|
-  EveryPolitician::Wikidata.scrape_wikidata(names: { en: sliced })
+
+names = {}
+# TODO go back to 97
+(113 .. 114).each do |cid|
+  names[cid] = EveryPolitician::Wikidata.wikipedia_xpath( 
+    url: "https://en.wikipedia.org/wiki/#{ActiveSupport::Inflector.ordinalize cid}_United_States_Congress",
+    after: '//span[@id="House_of_Representatives_3"]',
+    before: '//span[@id="Changes_in_membership"]',
+    xpath: './/li//a[not(@class="new")]/@title',
+  ).reject { |n| n.downcase.include? 'congressional district' }
 end
+
+
+morph_names = members.map { |w| w[:wikiname] }
+toget = morph_names | names.values.flatten.uniq
+
+EveryPolitician::Wikidata.scrape_wikidata(names: { en: toget }, batch_size: 50)
