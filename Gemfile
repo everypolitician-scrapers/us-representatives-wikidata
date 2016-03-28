@@ -16,4 +16,6 @@ gem "sqlite_magic", :git => "https://github.com/openc/sqlite_magic.git"
 gem "scraperwiki", git: "https://github.com/openaustralia/scraperwiki-ruby.git", branch: "morph_defaults"
 gem "wikidata-fetcher", '>=0.14.0', git: "https://github.com/everypolitician/wikidata-fetcher.git"
 gem 'wikisnakker', git: 'https://github.com/everypolitician/wikisnakker', branch: 'master'
+gem "activesupport-inflector"
+gem "i18n"
 
