@@ -23,7 +23,7 @@ end
 names = {}
 (97 .. 114).each do |cid|
   puts cid
-  names[cid] = EveryPolitician::Wikidata.wikipedia_xpath( 
+  names[cid] = EveryPolitician::Wikidata.wikipedia_xpath(
     url: "https://en.wikipedia.org/wiki/#{ActiveSupport::Inflector.ordinalize cid}_United_States_Congress",
     after: '//span[@id="House_of_Representatives_3"]',
     before: '//span[@id="Changes_in_membership"]',
@@ -34,4 +34,4 @@ end
 morph_names = members.map { |w| w[:wikiname] }
 wiki_names = names.values.flatten.uniq
 
-EveryPolitician::Wikidata.scrape_wikidata(names: { en: morph_names | wiki_names }, batch_size: 50)
+EveryPolitician::Wikidata.scrape_wikidata(names: { en: morph_names | wiki_names })
