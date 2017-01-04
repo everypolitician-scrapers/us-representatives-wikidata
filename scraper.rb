@@ -21,7 +21,7 @@ end
 
 
 names = {}
-(97 .. 114).each do |cid|
+(97 .. 115).each do |cid|
   puts cid
   names[cid] = EveryPolitician::Wikidata.wikipedia_xpath(
     url: "https://en.wikipedia.org/wiki/#{ActiveSupport::Inflector.ordinalize cid}_United_States_Congress",
