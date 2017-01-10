@@ -23,9 +23,10 @@ GIT
 
 GIT
   remote: https://github.com/everypolitician/wikisnakker.git
-  revision: cc55a4f45290c8ad86dc3e2a41ea678e02e3dd94
+  revision: 502c9bd62a3c8a5e6671fc4744b4a5c7c5e618bc
   specs:
-    wikisnakker (0.7.0)
+    wikisnakker (0.8.0)
+      yajl-ruby
 
 GIT
   remote: https://github.com/openaustralia/scraperwiki-ruby.git
@@ -114,6 +115,7 @@ GEM
       faraday (~> 0.9)
       faraday_middleware (~> 0.9)
       hashie (~> 3.3)
+    yajl-ruby (1.3.0)
 
 PLATFORMS
   ruby
