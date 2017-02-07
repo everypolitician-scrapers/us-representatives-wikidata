@@ -23,9 +23,10 @@ GIT
 
 GIT
   remote: https://github.com/everypolitician/wikisnakker.git
-  revision: 502c9bd62a3c8a5e6671fc4744b4a5c7c5e618bc
+  revision: bda210f03c34722efa80436ca216f0f499cfa6a9
   specs:
-    wikisnakker (0.8.0)
+    wikisnakker (0.9.0)
+      require_all
       yajl-ruby
 
 GIT
@@ -137,7 +138,7 @@ DEPENDENCIES
   wikisnakker!
 
 RUBY VERSION
-   ruby 2.0.0p648
+   ruby 2.3.3p222
 
 BUNDLED WITH
    1.13.6
